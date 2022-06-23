@@ -31,8 +31,8 @@ def memory_usage(message: str = 'debug'):
     print(f"[{message}] memory usage: {rss: 10.5f} MB")
 start_time = time.time()
 
-N,M,K = 5,8,3 # map(int, sys.stdin.readline().split())
-data = [2,4,5,4,6] # list(map(int, sys.stdin.readline().split()))
+N,M,K = map(int, sys.stdin.readline().split()) # 5 8 3
+data = list(map(int, sys.stdin.readline().split())) # 2 4 5 4 6
 
 result = 0
 
