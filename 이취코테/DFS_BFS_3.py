@@ -73,7 +73,7 @@ distnt[start_point] = 0 # 시작점->시작점 = 0
 
 
 def bfs(s):
-    q = deque([s])
+    q = deque(s)
     
     while q:
         now_point = q.popleft()
