@@ -1,5 +1,5 @@
 '''
-문제 1 - 웨에서 아래로
+문제 1 - 위에서 아래로
 - 풀이 15분, 시간제한 1초, 메모리제한 128MB, 기출 T 기업 코딩 테스트
 
 다양한 수가 크기 상관없이 나열되어 존재하는 수열을 
@@ -15,11 +15,11 @@
 -> 27, 15, 12
 
 - 입력조건
-	- 첫째 줄: 수열에 속하 수의 개수 n (1<=n<=500) 
+	- 첫째 줄: 수열에 속한 수의 개수 n (1<=n<=500) 
     - 둘째 줄 ~ n+1째 줄: 1dltkd 100,000 이하의 자연수
                 
 - 출력조건
-수열을 공백으러 구분하여 출력
+수열을 공백으로 구분하여 출력
 
 '''
 import sys
@@ -56,7 +56,8 @@ def gs_sort(num_ls):
 res = sorted(nums, reverse=True)
 
 # 퀵정렬
-def quick_sort(num_ls):
+def quick_sort(nums):
+    num_ls = nums.copy()
     if len(num_ls) <=1:
         return num_ls
     
@@ -68,13 +69,31 @@ def quick_sort(num_ls):
     
     return quick_sort(right_nums)+ [pivot] + quick_sort(left_nums)
 
+# 삽입정렬
+def inser_sort(nums):
+    num_ls = nums.copy()
+    for i in range(1,len(num_ls)):
+        point_num = i
+        while True:
+            if point_num == 0:
+                num_ls[0], num_ls[i] = num_ls[i], num_ls[0]
+                break
+            elif num_ls[point_num] < num_ls[point_num-1]:
+                num_ls[point_num], num_ls[point_num-1] = num_ls[point_num-1], num_ls[point_num]
+                point_num-=1
+            else:
+                break
+    return num_ls
+    
+
 print("정답(계수정렬):", *gs_sort(nums), end=' ')
 print('\n')
 print("정답(퀵 정렬):", *quick_sort(nums), end=' ')
 print('\n')
 print("정답(method):", *res, end=' ')
 print('\n')
-
+print("정답(삽입정렬):", *inser_sort(nums), end=' ')
+print('\n')
 end_time = time.time()
 print(("time :", end_time-start_time))
 memory_usage('#1')
