@@ -18,7 +18,7 @@
 
 - 입력조건
 	- 첫째 줄: 식량창고의 개수 정수 N(3 <= X <= 100)
-    - 둘째 줄: 공백으로 구분된 각 식량창고의 식량 개수 K(0<=K<=1,000)
+    - 둘째 줄: 공백으로 구분된 각 식량창고의 식량 개수 K(0 <= K <= 1,000)
                 
 - 출력조건
 개미가 얻을 수 있는 최대 값
@@ -43,15 +43,15 @@ arr = list(map(int, sys.stdin.readline().rstrip().split()))
 start_time = time.time()
 
 def dynamic_prog(arr):
-    num_rule = {}
+    num_rule = {} # [None]*len(arr)
     
     num_rule[0] = arr[0]
-    num_rule[1] = arr[1]
+    num_rule[1] = max(arr[0:2])
     
-    for i in range(2, n):
-        num_rule[i] = max(num_rule[i-1], num_rule[i-2]+num_rule[i]) 
+    for i in range(2, len(arr)):
+        num_rule[i] = max(num_rule[i-1], num_rule[i-2]+arr[i]) 
         
-    return num_rule[n-1]
+    return num_rule[len(arr)-1]
 
 print("정답:", dynamic_prog(arr))
 
@@ -64,4 +64,10 @@ memory_usage('#1')
 1 3 1 5
 
 -> 8
+
+
+4
+3 1 2 3
+
+-> 6
 '''
