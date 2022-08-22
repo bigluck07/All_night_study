@@ -62,8 +62,8 @@ def gs_sort(k,a,b):
             continue
         else:
             res_b = res_b+[idx]*val
-    # print(res_a) 
-    # print(res_b) 
+    print(res_a) 
+    print(res_b) 
     
     for i in range(k):
         if res_a[i] < res_b[-(i+1)]:
