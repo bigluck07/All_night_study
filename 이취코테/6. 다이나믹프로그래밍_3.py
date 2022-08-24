@@ -30,12 +30,12 @@ def memory_usage(message: str = 'debug'):
     rss = p.memory_info().rss / 2 ** 20 # Bytes to MB
     print(f"[{message}] memory usage: {rss: 10.5f} MB")  
       
-n = int(sys.stdin.readline().rstrip())
+n = 800 # int(sys.stdin.readline().rstrip())
 
 start_time = time.time()
 
 num_rule = {1:1,2:3}
-# num_rule = [0,1,3] + [0]*(n+1)
+# num_rule = [0,1,3] + [0]*(1000)
 
 def dynamic_prog(num):
     try:
@@ -46,10 +46,15 @@ def dynamic_prog(num):
             num_rule[i] = (num_rule[i-1] + 2*num_rule[i-2])%796796
         return num_rule[num]
     
-    except:
+    except KeyError:
+        # Bottom_up
+        # for i in range(3, num+1):
+        #     num_rule[i] = (num_rule[i-1] + 2*num_rule[i-2])%796796
 
-        for i in range(3, num+1):
-            num_rule[i] = (num_rule[i-1] + 2*num_rule[i-2])%796796
+        
+        # Top_down
+        num_rule[num] = (dynamic_prog(num-1) + 2*dynamic_prog(num-2)) % 796796
+        
             
         return num_rule[num]
 
@@ -58,16 +63,3 @@ print("정답:", dynamic_prog(n))
 end_time = time.time()
 print(("time :", end_time-start_time))
 memory_usage('#1')
-
-'''
-4
-1 3 1 5
-
--> 8
-
-
-4
-3 1 2 3
-
--> 6
-'''
