@@ -1,7 +1,53 @@
-import sys
+'''
+예제코드 4
+- 벨만포드
 
+
+
+- 예시
+6 11
+1
+1 2 2
+1 3 5
+1 4 1
+2 3 3
+2 4 2
+3 2 3
+3 6 5
+4 3 3
+4 5 1
+5 3 1
+5 6 2
+
+->	0
+	2
+	3
+	1
+	2
+	4 
+
+
+- 입력조건
+	- 첫째 줄: 노드 개수 v, 간선 개수 e 가 공백을 기준으로 입력(정수)
+	- 
+                
+- 출력조건
+
+
+'''
+
+import sys, copy, heapq, time, psutil
+import numpy as np
+
+def memory_usage(message: str = 'debug'):
+    # current process RAM usage
+    p = psutil.Process()
+    rss = p.memory_info().rss / 2 ** 20 # Bytes to MB
+    print(f"[{message}] memory usage: {rss: 10.5f} MB")  
+      
 input = sys.stdin.readline
-INF = int(1e9)
+INF = int(1e9) # 무한을 의미 -> 10억 설정
+start_time = time.time()
 
 # 노드의 개수, 간선의 개수를 입력
 v, e = map(int, input().rstrip().split())
@@ -52,3 +98,9 @@ else:
         # 도달할 수 있으면 거리 출력
         else:
             print(distance[i])
+
+print(path)
+
+end_time = time.time()
+print(("time :", end_time-start_time))
+memory_usage('#1')
