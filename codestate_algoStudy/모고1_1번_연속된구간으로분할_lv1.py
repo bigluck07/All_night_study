@@ -20,6 +20,18 @@ kkkkkk -> "",""
 ddfdrggmmasmme
 ['', 'fdr', 'as', 'e']
 '''
+import sys, copy, heapq, time, psutil
+import numpy as np
+
+def memory_usage(message: str = 'debug'):
+    # current process RAM usage
+    p = psutil.Process()
+    rss = p.memory_info().rss / 2 ** 20 # Bytes to MB
+    print(f"[{message}] memory usage: {rss: 10.5f} MB")
+    
+input = sys.stdin.readline
+s = input().rstrip()
+start_time = time.time()
 
 def solution(s):
     answer = []
@@ -58,11 +70,12 @@ def solution(s):
         answer.append("")
         
     return answer
-    
-    
-s = input().rstrip()
 
 print(solution(s))
+
+end_time = time.time()
+print(("time :", end_time-start_time))
+memory_usage('#1')
 
 
 
