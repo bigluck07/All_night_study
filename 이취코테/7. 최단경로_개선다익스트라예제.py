@@ -65,6 +65,7 @@ for _ in range(m):
 	graph[a].append((b,c))
 
 def dijkstra(start):
+    path[start] = [start]
     q = [] # 시작 노드 경로 0으로 큐에 삽입
     heapq.heappush(q, (0, start))
     distance[start] = 0

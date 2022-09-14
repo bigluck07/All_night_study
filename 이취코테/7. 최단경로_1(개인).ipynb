@@ -49,41 +49,88 @@ def memory_usage(message: str = 'debug'):
     
 input = sys.stdin.readline
 start_time = time.time()
-n,m = map(int, input().rstrip().split())
 INF = int(1e9)
-graph = [[[INF, []] for _ in range(n+1)]for _ in range(n+1)]# 거리와 경로
 
-for i in range(1,m+1): # 간선입력
-    a,b = map(int, input().rstrip().split())
-    graph[a][b][0] = 1
-    graph[a][b][1] = [a,b]
-    graph[b][a][0] = 1
-    graph[b][a][1] = [b,a]
+def fw_algo():
+    
+    n,m = map(int, input().rstrip().split())
+    graph = [[[INF, []] for _ in range(n+1)]for _ in range(n+1)]# 거리와 경로
+    
+    for i in range(1,m+1): # 간선입력
+        a,b = map(int, input().rstrip().split())
+        graph[a][b][0] = 1
+        graph[a][b][1] = [a,b]
+        graph[b][a][0] = 1
+        graph[b][a][1] = [b,a]
+    
+    destination, gateway = map(int, input().rstrip().split())
+    
+    for i in range(1,n+1): # 자기자리
+        graph[i][i][0] = 0
+        graph[i][i][1] = [i]
 
-for i in range(1,n+1): # 자기자리
-    graph[i][i][0] = 0
-    graph[i][i][1] = [i]
+    for k in range(1, n+1):
+        for x in range(1, n+1):
+            for y in range(1, n+1):
+                temp = graph[x][y][0]
+                graph[x][y][0] = min(graph[x][y][0], graph[x][k][0]+graph[k][y][0])
+                if temp != graph[x][y][0]: # 갱신확인
+                    graph[x][y][1] = graph[x][k][1]+graph[k][y][1][1:]
 
+    if (graph[1][gateway][0]==INF) or (graph[gateway][destination][0]==INF):
+        print('도착지 접근 불가', -1)
+    else:
+        print('최단거리:', graph[1][gateway][0]+graph[gateway][destination][0])
+        print('최단경로:', graph[1][gateway][1]+graph[gateway][destination][1][1:])
+        
+    return graph
+
+# fw_algo()  
+ 
+# end_time1 = time.time()
+# print(("time :", end_time1-start_time))
+# memory_usage('#1')
+
+def dix_algo(n,m,graph, start = 1):
+    '''
+    경로 넣는 것 수정해야 함
+    '''
+    distance = [[INF, []] for _ in range(n+1)]
+    distance[start][1] = [start]
+    q = []
+    heapq.heappush(q, (0, start))
+    distance[start][0] = 0
+    while q:
+        dist, now = heapq.heappop(q)
+        # if not now in distance[now][1]:
+        #     distance[now][1] = [now]
+        if distance[now][0] < dist:
+            continue
+        for i in graph[now]:
+            cost = dist+1
+            if cost < distance[i][0]:
+                distance[i][0] = cost
+                heapq.heappush(q, (cost, i))
+                distance[i][1] = distance[now][1]+[i]
+    return distance
+
+
+n,m = map(int, input().rstrip().split())
+graph = [[] for i in range(n+1)]
+for _ in range(m): # 간선입력
+        a,b = map(int, input().rstrip().split())
+        graph[a].append(b)
+        graph[b].append(a)
 destination, gateway = map(int, input().rstrip().split())
+ToGtw = dix_algo(n,m,graph, 1)
+ToDtn = dix_algo(n,m,graph, gateway)
 
-for k in range(1,n+1):
-    for x in range(1,n+1):
-        for y in range(1,n+1):
-            temp = graph[x][y][0] # 거리 확인
-            graph[x][y][0] = min(graph[x][y][0], graph[x][k][0]+graph[k][y][0])
-            if temp != graph[x][y][0]: # 갱신한 경우
-                graph[x][y][1] = graph[x][k][1]+graph[k][y][1][1:]
-
-if (graph[1][gateway][0]==INF) or (graph[gateway][destination][0]==INF):
-    print(-1)
-else:
-    print(graph[1][gateway][0], graph[gateway][destination][0])
-    
-    
-    
-end_time = time.time()
-print(("time :", end_time-start_time))
+print(ToGtw[gateway])
+print(ToDtn[destination])
+end_time2 = time.time()
+# print(("time :", end_time2-end_time1))
 memory_usage('#1')
+
 
 '''
 [1]      [1, 2]   [1, 3]   [1, 4][1, 3, 5]
@@ -91,5 +138,4 @@ memory_usage('#1')
 [3, 1]   [3, 1, 2][3]      [3, 4][3, 5]
 [4, 1]   [4, 2]   [4, 3]   [4]   [4, 5]
 [5, 3, 1][5, 4, 2][5, 3]   [5, 4][5]
-
 '''
