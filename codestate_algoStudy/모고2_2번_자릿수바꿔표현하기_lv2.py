@@ -60,7 +60,7 @@ def solution(rule, A, B):
         rev_base = ''
         n= A-B
         while n>0:
-            n, mod = divmod(n,nums)
+            n, mod = divmod(n,q)
             rev_base+=str(mod)
         return rev_base[::-1]
     

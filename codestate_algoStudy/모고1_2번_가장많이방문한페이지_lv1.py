@@ -87,22 +87,21 @@ def solution(s):
     point=""
     s = list(map(str, s.split()))
     for i in s:
-        if i in ['B','F']:
-            if i == 'B':
-                if len(back)>0:
-                    front.append(point)
-                    point = back.pop()
-                    page[point]+=1
-                else:
-                    continue
-                    
-            elif 1=='F':
-                if len(front)>0:
-                    back.append(point)
-                    point = front.pop()
-                    page[point]+=1
-                else:
-                    continue
+        if i == 'B':
+            if len(back)>0:
+                front.append(point)
+                point = back.pop()
+                page[point]+=1
+            else:
+                continue
+                
+        elif 1=='F':
+            if len(front)>0:
+                back.append(point)
+                point = front.pop()
+                page[point]+=1
+            else:
+                continue
         else:
             if point != "":
                 back.append(point)
@@ -119,4 +118,4 @@ print(solution(s))
 
 end_time = time.time()
 print(("time :", end_time-start_time))
-memory_usage('#1')
+memory_usage('#1') 

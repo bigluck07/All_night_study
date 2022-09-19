@@ -67,6 +67,20 @@ input = sys.stdin.readline
 start_time = time.time()
 
 def solution(text):
+    point = 0
+    max_num = 2
+    patten = {'a':0, 'b':1, 'ab':2,'ba':3,'aa':4} # 패턴의 번호를 찾을 수 있음
+    patten_len = {1: ['a','b'], 2:['ab', 'ba','aa'], 3:[]}
+    while text:
+        
+        if 'aaa' in patten: # 패턴있는지 확인
+            # 한칸 넘어가지
+        else:
+            patten['aaa'] = max_num
+            max_num+=1
+            text = text[len('aaa')-1:]
+            'ab'
+
     answer = ''
     return answer
 

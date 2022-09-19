@@ -75,6 +75,7 @@ def solution(n, t1, t2):
     student[t1[0]] = 1
     student[t2[0]] = 1
     group = [[t1[0], t2[0]]]
+    
     # 스터디 그룹 만들기
     for x,y in zip(t1[1:],t2[1:]):
         student[x] = 1
