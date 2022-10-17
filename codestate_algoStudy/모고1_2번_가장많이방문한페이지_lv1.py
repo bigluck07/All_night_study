@@ -119,3 +119,42 @@ print(solution(s))
 end_time = time.time()
 print(("time :", end_time-start_time))
 memory_usage('#1') 
+
+
+from collections import deque
+
+def solution(s):
+    answer = 0
+    s = s.split()
+    front = deque()
+    back = deque()
+    now = ''
+    cnt = {}
+    for i in s:
+        if i == 'B':
+            if len(back) > 0:
+                front.append(now)
+                now = back.pop()
+                cnt[now]+=1
+        elif i == 'F':
+            if len(front) > 0:
+                back.append(now)
+                now = front.pop()
+                cnt[now]+=1
+        else:
+            front = deque()
+            if i in cnt:
+                back.append(now)
+                now = i
+                cnt[now]+=1
+            else:
+                if now != '':
+                    back.append(now)
+                    now = i
+                    cnt[now]=1
+                else:
+                    now = i
+                    cnt[now]=1
+    cnt = sorted(cnt.items(), key=lambda x: x[1], reverse=True)
+    answer = cnt[0][1]
+    return answer

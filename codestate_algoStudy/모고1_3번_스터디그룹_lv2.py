@@ -109,3 +109,78 @@ print(solution(s))
 end_time = time.time()
 print(("time :", end_time-start_time))
 memory_usage('#1')
+
+
+
+
+def find_p(p, x): # 루트노드 찾기
+    answer = []
+    if p[x] != x:
+        p[x] = find_p(p, p[x])
+    return p[x]
+
+def union_p(p, a, b):
+    answer = []
+    a = find_p(p, a)
+    b = find_p(p, b)
+    if a < b:
+        p[b] = a
+        idx = -1
+        while True:
+            if b in p:
+                if idx == p.index(b):
+                    break
+                idx = p.index(b)
+                p[idx] = a
+            else:
+                break
+    else:
+        p[a] = b
+        idx = -1
+        while True:
+            if a in p:
+                if idx == p.index(a):
+                    break
+                idx = p.index(a)
+                p[idx] = b
+            else:
+                break
+
+def solution(n, t1, t2):
+    answer = []
+    stud_dict = {}
+    students = [0] * (n+1)
+
+    for i in range(1, n+1):
+        students[i] = i
+    
+    t12 = [[min(x,y), max(x,y)] for x,y in zip(t1,t2)]
+    t12 = sorted(t12, key=lambda x: (x[0], x[1]))
+
+    for i in t12:
+        union_p(students, i[0], i[1])
+
+
+    for i in range(1, n+1):
+        if students[i] in stud_dict:
+            stud_dict[students[i]].append(i)
+        else:
+            stud_dict[students[i]] = [i]
+
+
+    for i in stud_dict:
+        if len(stud_dict[i]) == 1:
+            # print(stud_dict[i])
+            answer.append(stud_dict[i][0])
+        else:
+            if (len(stud_dict[i])%2) == 0:
+                ans = (len(stud_dict[i])//2)-1
+                # print(stud_dict[i])
+                answer.append(stud_dict[i][ans])
+            else:
+                ans = (len(stud_dict[i])//2)
+                # print(stud_dict[i])
+                answer.append(stud_dict[i][ans])
+
+    answer.sort()
+    return answer
