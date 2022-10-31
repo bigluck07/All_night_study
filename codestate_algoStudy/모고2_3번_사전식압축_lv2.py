@@ -75,6 +75,7 @@ def solution(text):
         
         if 'aaa' in patten: # 패턴있는지 확인
             # 한칸 넘어가지
+            p = 0
         else:
             patten['aaa'] = max_num
             max_num+=1
@@ -92,9 +93,24 @@ print(solution(text))
 end_time = time.time()
 print(("time :", end_time-start_time))
 memory_usage('#1')
+
 '''
 입출력 예
 text            return
 "ABABAABAB"     [0,1,2,0,4,1]
 "BBAAA"         [1, 1, 0, 4]
+'''
+
+
+'''
+def solution(text):
+    answer = []
+    patten = {'A':0, 'B':1} 
+    loc = 0
+    now = 0
+    idx = 2
+    for i in range(1, len(text)):
+        if text[loc:i] not in patten:
+            patten[text[loc:i]] = 
+    return answer
 '''

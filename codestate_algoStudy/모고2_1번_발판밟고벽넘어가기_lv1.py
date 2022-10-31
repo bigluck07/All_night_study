@@ -47,39 +47,67 @@ input = sys.stdin.readline
 # s = input().rstrip()
 start_time = time.time()
 
+# def solution(h, k, boxes): # 벽높이, 점프가능높이, 발판배열
+#     answer = 0
+#     step = {0:[]}
+#     path= []
+#     now = 0
+#     for i in boxes: #발판 별 몇번을 올라야 하는지 확인
+#         if i <= k:
+#             step[0]+=[i]
+#         else:
+#             if i%k > 0:
+#                 if i//k in step.keys():
+#                     step[i//k]+=[i]
+#                 else:
+#                     step[i//k]=[i]
+#             else:
+#                 if (i//k)-1 in step.keys():
+#                     step[(i//k)-1]+=[i]
+#                 else:
+#                     step[(i//k)-1]=[i]
+                    
+#     for i in sorted(step.keys()):
+#         if now >= h:
+#             break
+#         if now == 0:
+#             now +=max(step[i])
+#             path.append(max(step[i]))
+#         else:
+#             now +=(max(step[i])-now)
+#             path.append(max(step[i]))
+#         answer+=1
+        
+#     if (now+k) < h:
+#         answer=-1
+#     return answer
+
 def solution(h, k, boxes): # 벽높이, 점프가능높이, 발판배열
     answer = 0
-    step = {0:[]}
     path= []
+    boxes.sort()
     now = 0
-    for i in boxes: #발판 별 몇번을 올라야 하는지 확인
-        if i <= k:
-            step[0]+=[i]
+    for i in boxes:
+        if now+k >= i:
+            this = i
         else:
-            if i%k > 0:
-                if i//k in step.keys():
-                    step[i//k]+=[i]
-                else:
-                    step[i//k]=[i]
-            else:
-                if (i//k)-1 in step.keys():
-                    step[(i//k)-1]+=[i]
-                else:
-                    step[(i//k)-1]=[i]
-                    
-    for i in sorted(step.keys()):
-        if now >= h:
-            break
-        if now == 0:
-            now +=max(step[i])
-            path.append(max(step[i]))
-        else:
-            now +=(max(step[i])-now)
-            path.append(max(step[i]))
-        answer+=1
-        
-    if (now+k) < h:
-        answer=-1
+            now = this
+            path.append(this)
+            if now+k >= i:
+                this = i
+
+    if now+k >= h:
+        return len(path)
+
+    if this not in path:
+        path.append(this)
+        now = this
+        if now+k >= h:
+            return len(path)
+
+    if answer == 0:
+        answer = -1
+
     return answer
 
 h, k = 12,3 #map(int, input().rstrip().split())
@@ -96,3 +124,39 @@ h   k   boxes                           result
 10  1   [9, 8, 7, 6, 5, 4, 3, 2, 1]     9
 20  18  [1]                             -1
 '''
+
+# from collections import defaultdict
+# def solution(h, k, boxes):
+#     answer = 0
+#     step = defaultdict(list)
+
+#     for i in boxes: #발판 별 몇번을 올라야 하는지 확인
+#         if i <= k:
+#             step[0]+=[i]
+#         else:
+#             if i%k > 0:
+#                 step[i//k]+=[i]
+#             else:
+#                 step[(i//k)-1]+=[i]
+
+#     check = 0
+#     for i in sorted(step):
+#         print(check)
+#         if i == 0:
+#             check+=max(step[i])
+#             continue
+#         this = 0
+#         for j in step[i]:
+#             if check+3 >= check+j:
+#                 this = j
+#             else:
+#                 break
+#         check+=this
+#         if check+k >= h: # 지금 뛰어 넘을 수 있다면 멈춤
+#             answer = i
+#             break
+
+#     # if check+k < h:
+#     #     answer = -1
+
+#     return answer
