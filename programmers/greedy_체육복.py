@@ -52,14 +52,14 @@ lost = list(map(int, sys.stdin.readline().rstrip().split()))
 reserve = list(map(int, sys.stdin.readline().rstrip().split()))
 start_time = time.time()
 
+'''
 def solution(n, lost, reserve):
-    '''
-    의사코드
-    여분학생 == 도난학생 -> 리스트 삭제
-    여분학생 리스트를 반복문 돌리고, +-1인 도난학생을 도난리스트에서 삭제한다
-    남은 도난 리스트의 값을 총 학생수에서 뺀 나머지를 반환한다
+
+    # 의사코드
+    # 여분학생 == 도난학생 -> 리스트 삭제
+    # 여분학생 리스트를 반복문 돌리고, +-1인 도난학생을 도난리스트에서 삭제한다
+    # 남은 도난 리스트의 값을 총 학생수에서 뺀 나머지를 반환한다
     
-    '''
     answer = n
     for i in lost:
         if i in reserve:
@@ -85,12 +85,43 @@ def solution(n, lost, reserve):
         answer-=len(lost)
     
     return answer
-
+'''
+def solution(n, lost, reserve):
+    '''
+    의사코드
+    여분학생 == 도난학생 -> 리스트 삭제
+    여분학생 리스트를 반복문 돌리고, +-1인 도난학생을 도난리스트에서 삭제한다
+    남은 도난 리스트의 값을 총 학생수에서 뺀 나머지를 반환한다
+    
+    '''
+    answer = n
+    new_lost = []
+    for i in lost:
+        if i in reserve:
+            reserve.remove(i)
+        else:
+            new_lost.append(i)
+    
+    new_lost.sort()
+    reserve.sort()
+    for i in reserve:
+        up = i+1
+        down = i-1
+        if down in new_lost:
+            new_lost.remove(down)
+        elif up in new_lost:
+            new_lost.remove(up)
+            
+    if len(new_lost) > 0:
+        answer-=len(new_lost)
+    
+    return answer
 
 print("정답:", solution(n, lost, reserve))
 end_time = time.time()
 print(("time :", end_time-start_time))
 memory_usage('#1')
+
 
 '''
 5   2 4   1 3 5     5
