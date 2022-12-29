@@ -10,6 +10,7 @@ public class Quiz {
         int[] num = {10, 1, 12};
         System.out.println(num[2]);
 
-        System.out.println(num[num.length - 1]);
+        int[] num2 = {10, 20, 30};
+        System.out.println(num2[num2.length - 1]);
     }
 }
