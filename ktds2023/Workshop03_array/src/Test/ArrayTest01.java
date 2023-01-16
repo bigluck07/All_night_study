@@ -15,9 +15,12 @@ public class ArrayTest01 {
 		int sum = Arrays.stream(arr).sum();
 		System.out.println("sum="+sum);
 		
+		
 		int avg = (int)sum/arr.length;
 //		int avg = (int)Arrays.stream(arr).average().orElse(0);
-//		int avg2 = (int)Arrays.stream(arr).average()//.getAsDouble(); 얘로 optionaldouble에서 double 값을 꺼내올 수 있음// 결과값이 orElse를 통과하면서 double를 반환해서 int변수에 할당 될 수 있음
+//		int avg2 = (int)Arrays.stream(arr).average()
+			//.getAsDouble(); 얘로 optionaldouble에서 double 값을 꺼내올 수 있음
+		// 결과값이 orElse를 통과하면서 double를 반환해서 int변수에 할당 될 수 있음
 		System.out.println("avg="+avg);
 
 	}//end main
