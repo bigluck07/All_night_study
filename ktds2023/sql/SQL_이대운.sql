@@ -1,0 +1,59 @@
+SELECT * FROM product;
+SELECT * FROM factory;
+SELECT * FROM store;
+
+
+
+# -----------
+# 1. 제품이 생산된 공장위치가 "SEOUL"인 제품 중 판매점에 재고가 없는 상품을 출력한다.
+SELECT PDNAME AS 제품카테고리, PDSUBNAME AS 제품명, f.FACNAME AS 공장명, s.STONAME AS 판매점명, NVL(s.STAMOUNT,0) AS 판매점재고수량
+FROM product p JOIN factory f ON p.FACTNO=f.FACTNO
+				   JOIN STORE s ON p.PDNO=s.PDNO
+WHERE f.FACLOC="SEOUL" AND NVL(s.STAMOUNT,0)=0;
+#					JOIN STORE s ON p.PDNO=s.PDNO;
+
+
+# 2. 제품카테고리가 “TV”인 제품 중 가장 싼 것보다 비싼 모든 제품과,
+# 제품카테고리가 “CELLPHONE”인 제품 중 가장 비싼 제품보다 싼 모든 제품을 출력한다.
+# 제품원가(PDCOST)를 기준으로 한다.
+SELECT PDSUBNAME AS 제품명, PDPRICE AS 제품원가, PDPRICE AS 제품가격
+FROM product
+WHERE PDPRICE BETWEEN (SELECT MIN(PDCOST) FROM product WHERE PDNAME="TV") AND (SELECT MAX(PDCOST) FROM product WHERE PDNAME="CELLPHONE");
+
+
+# 3. 신규 테이블을 만들어 패기 되는 모든 데이터를 관리하고자 한다.
+CREATE TABLE IF NOT EXISTS DISCARDED_PRODUCT
+(	PDNO INT PRIMARY KEY,
+	PDNAME VARCHAR(10) ,
+	PDSUBNAME VARCHAR(10),
+	FACTNO VARCHAR(5) REFERENCES FACTORY (FACTNO),
+	PDDATE DATE,
+	PDCOST INT,
+	PDPRICE INT,
+	PDAMOUNT INT,
+	DISCARDED_DATE DATE);
+	
+	
+# 4. PRODUCT 테이블에서 폐기 되는 제품정보들을 모두 조회 하여 DISCARDED_PRODUCT 테이블로 INSERT
+# 한다. 단, 트랜잭션 처리를 반드시 한다.
+# 폐기 날짜는 현재 시스템 날짜로 한다.
+#ALTER TABLE DISCARDED_PRODUCT
+#ADD CONSTRAINT DEFAULT NOW (DISCARDED_DATE);
+start transaction;
+INSERT INTO DISCARDED_PRODUCT(PDNO, PDNAME, PDSUBNAME, FACTNO, PDDATE, PDCOST, PDPRICE, PDAMOUNT)
+SELECT * FROM product WHERE FACTNO=(SELECT DISTINCT FACTNO FROM factory WHERE FACLOC="CHANGWON");
+UPDATE DISCARDED_PRODUCT
+SET DISCARDED_DATE=CURDATE()
+WHERE PDNO=10100003 OR PDNO=20110004;
+COMMIT;
+
+SELECT * FROM discarded_product;
+
+
+#5. [문제 4]에서 폐기된 제품을 product 테이블에서 모두 삭제 한다. 단, 트랜잭션 처리를 반드시 한다.
+#SELECT * from product WHERE PDNO IN ( SELECT PDNO FROM DISCARDED_PRODUCT )
+start transaction;
+DELETE FROM product
+WHERE PDNO IN ( SELECT PDNO FROM discarded_product );
+COMMIT;
+ 

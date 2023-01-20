@@ -41,8 +41,18 @@ ORDER BY ENAME;
 2. 부서테이블과 사원테이블에서 사번 , 사원명 , 급여 , 부서명을 검색 하시오 . 
 단 , 급여가 2000 이상인 사원에 대하여 급여기준으로 내림차순 정렬할 것
 
+SELECT EMPNO, ENAME, SAL, d.DNAME
+FROM emp e JOIN dept d ON e.DEPTNO=d.DEPTNO
+WHERE SAL>2000
+
+
+3. 부서 테이블과 사원 테이블에서 사번, 사원명, 업무, 급여 , 부서명을 검색 하시오. 단, 업무가
+Manager이며 급여가 2500 이상인 사원에 대하여 사번을 기준으로 오름차순 정렬할 것.
+SELECT e.EMPNO, e.ENAME, e.JOB, e.SAL, DNAME
+FROM dept d JOIN emp e ON d.DEPTNO=e.DEPTNO
+WHERE (e.JOB=Manager) & (e.SAL>=2500)
+ORDER BY e.EMPNO DESC;
 
 
 
 
-# 
