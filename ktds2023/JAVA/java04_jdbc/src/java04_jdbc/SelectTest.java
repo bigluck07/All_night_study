@@ -30,7 +30,7 @@ public class SelectTest {
 		String sql = "select deptno as no, dname as name, loc from dept";
 		
 		//5. PreparedStatement ==> sql문 전송을 위한 객체
-		PreparedStatement pstmt = con.prepareStatement(sql);
+		PreparedStatement = con.prepareStatement(sql);
 		
 		//6. sql문 전송
 		/*

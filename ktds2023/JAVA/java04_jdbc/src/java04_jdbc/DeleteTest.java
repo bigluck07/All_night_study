@@ -41,7 +41,7 @@ public class DeleteTest {
 		int n = pstmt.executeUpdate();
 		System.out.println("적용된 행의 갯수: "+n);
 		
-		//7. 자원반납 -> close();
+		//7. 자원반납 -> close(); 반드시 역순으로
 		// Connection -> PreparedStatement -> ResultSet의 역순으로 닫기
 		pstmt.close();
 		con.close();
