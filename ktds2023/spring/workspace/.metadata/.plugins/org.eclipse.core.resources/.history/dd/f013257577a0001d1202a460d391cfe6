@@ -1,0 +1,16 @@
+package com.service;
+
+import com.dao.DeptDAO;
+
+public class DeptServiceImpl {
+	public DeptServiceImpl() {
+		
+		DeptDAO dao;
+		
+		public DeptServiceImpl(DeptDAO dao) {
+			// spring
+			this.dao = new DeptDAO();
+		}
+		
+	}
+}
