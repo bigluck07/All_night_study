@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.config.DeptMapper">
+
+
+  <select id="deptAll" resultType="DeptDTO">
+    select deptno, dname, loc
+    from dept
+    order by deptno
+  </select>
+  
+  <select id="deptAllDesc" resultType="DeptDTO">
+    select deptno, dname, loc
+    from dept
+    order by deptno desc
+  </select>
+
+  <insert id="write" parameterType="DeptDTO">
+  	insert into dept (deptno, dname, loc)
+  	values( #{deptno}, #{dname}, #{loc}) <!-- 메소드 명과 동일, 안귀찮으려면 칼럼명과 동일하게 가자 -->
+  </insert>
+  
+  <select id="retrieve" resultType="DeptDTO" parameterType="int">
+    select deptno, dname, loc
+    from dept
+   	where deptno = #{deptno}
+  </select>
+  
+  <update id="update" parameterType="DeptDTO">
+  	update dept 
+  	set dname = #{dname}, loc=#{loc}
+  	where deptno = #{deptno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+  	delete from dept 
+  	where deptno = #{deptno}
+  </delete>
+  
+  <select id="list" resultType="DeptDTO" parameterType="hashmap">
+    select deptno, dname, loc
+    from dept
+    <if test="searchName=='dname'">
+    	where dname Like concat('%', #{searchValue}, '%')
+    </if>
+    <if test="searchName!='dname'">
+    	where loc Like concat('%', #{searchValue}, '%')
+    </if>
+
+    
+    order by deptno
+  </select>
+</mapper>

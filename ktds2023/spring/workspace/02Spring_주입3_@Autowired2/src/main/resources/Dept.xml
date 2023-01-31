@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- 어노테이션 활성화 -->
+	<context:annotation-config /><!-- 시작, 끝 태그 한방에 -->
+<!-- 빈 등록 -->
+	<!-- <bean id="x" class="com.service.DeptServiceImpl"></bean>
+	 constructor가 없으면 기본생성자로 만드는데 없어서 에러남 -->
+	<bean id="x" class="com.service.DeptServiceImpl" />
+	<bean id="y" class="com.dao.DeptDAO">
+		<property name="mesg" value="Hello" />
+	</bean>
+	<bean id="y2" class="com.dao.DeptDAO">
+		<property name="mesg" value="World" />
+	</bean>
+</beans>
