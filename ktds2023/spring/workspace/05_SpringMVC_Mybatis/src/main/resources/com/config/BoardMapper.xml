@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.config.BoardMapper">
+
+	<select id="list" resultType="BoardDTO">
+		select no, title, author, 
+			   DATE_FORMAT(writeday, '%y-%m-%d') writeday,
+			   readcnt
+		from board
+		order by no
+	</select>
+	<insert id="write" parameterType="BoardDTO">
+		insert into board( title, author, content )
+		values (#{title}, #{author}, #{content})
+	</insert>
+</mapper>
