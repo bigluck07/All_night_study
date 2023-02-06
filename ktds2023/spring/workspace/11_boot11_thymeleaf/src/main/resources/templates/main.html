@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>main</h2>
+<!-- 아래에 조각(fragment)포함 시킴 -->
+<div th:replace="menu/menu :: menu-fragment"></div>
+<div th:replace="menu/menu :: menu-fragment2"></div>
+</body>
+</html>

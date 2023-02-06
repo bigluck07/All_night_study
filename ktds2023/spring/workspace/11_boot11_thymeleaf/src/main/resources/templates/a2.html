@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>a2</h2>
+<h3>4. th:href - a태그</h3>
+<a th:href="@{http://www.thymeleaf.org}">link</a><br>
+<a th:href="@{main}">상대경로 main</a><br>
+<a th:href="@{/main}">절대경로 main</a><br><!-- /는 context 앞이 아니고, controller 앞 -->
+<a th:href="@{a3(age=10, addr='서울')}"> a3 - 파라미터 들고가기</a><br>
+</body>
+</html>

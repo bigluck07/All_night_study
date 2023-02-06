@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>a4</h2>
+<h3>6. th:if</h3>
+<div th:text="${stringList.size()}"></div>
+<div th:if="${stringList.size()}==3">
+	Hello
+</div>
+
+<h3>7. th:switch</h3>
+<div th:switch="${stringList.size()}">
+  <p th:case="5">User is an administrator</p>
+  <p th:case="4">User is a manager</p>
+  <p th:case="*">User is a employee</p>
+</div>
+
+<h3>8. th:each</h3>
+<ul th:each="xxx: ${stringList}">
+	<li th:text="${xxx}"></li>
+</ul>
+
+<h3>8. th:each, idx</h3>
+<ul th:each="xxx, idx: ${stringList}">
+	<li th:text="${xxx}+${idx.count}"></li>
+</ul>
+</body>
+</html>
