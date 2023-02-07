@@ -1,17 +1,20 @@
 package com.example.entity;
 
-import org.springframework.context.annotation.Entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 public class User4 {
-	
-	@Id @GeneratedValue // primary key + 자동으로 증가
+
+	@Id @GeneratedValue
 	Long id;
 	
-	@Column(name="username", length=100, nullable = false) // 컬럼 정의
+	@Column(name = "username" , length = 100, nullable = false)
 	String name;
 	Integer age;
-	
 	
 	public User4() {
 	}
@@ -51,5 +54,5 @@ public class User4 {
 		return "User [id=" + id + ", name=" + name + ", age=" + age + "]";
 	}
 	
-
+	
 }

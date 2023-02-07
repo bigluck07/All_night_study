@@ -1,13 +1,15 @@
 package com.example.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @Entity
 public class User {
-	
+
 	@Id
 	Long id;
 	String name;
 	Integer age;
-	
 	
 	public User() {
 	}
@@ -47,5 +49,5 @@ public class User {
 		return "User [id=" + id + ", name=" + name + ", age=" + age + "]";
 	}
 	
-
+	
 }

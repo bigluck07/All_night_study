@@ -1,14 +1,17 @@
 package com.example.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
-@Table(name="TB_USER2") // table 명 정의
+@Table(name = "TB_USER2")
 public class User2 {
-	
+
 	@Id
 	Long id;
 	String name;
 	Integer age;
-	
 	
 	public User2() {
 	}
@@ -48,5 +51,5 @@ public class User2 {
 		return "User [id=" + id + ", name=" + name + ", age=" + age + "]";
 	}
 	
-
+	
 }

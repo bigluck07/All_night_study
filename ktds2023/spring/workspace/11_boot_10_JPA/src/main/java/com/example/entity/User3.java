@@ -1,15 +1,19 @@
 package com.example.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
 public class User3 {
-	
+
 	@Id
 	Long id;
 	
-	@Column(name="username", length=100, nullable = false) // 컬럼 생성 VARCHARR(255)
+	@Column(name = "username" , length = 100, nullable = false)
 	String name;
 	Integer age;
-	
 	
 	public User3() {
 	}
@@ -49,5 +53,5 @@ public class User3 {
 		return "User [id=" + id + ", name=" + name + ", age=" + age + "]";
 	}
 	
-
+	
 }
