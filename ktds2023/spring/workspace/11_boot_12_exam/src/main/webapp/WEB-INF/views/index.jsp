@@ -25,18 +25,23 @@
 </head>
 <body>
 	<div class="container">
-		
+
 		<form class="form-horizontal" action="write" method="post">
 			<div class="form-group">
 				<div class="col-sm-10" >
 						<a href="home"><img src="resources/images/ktds.png"></a>
 				</div>
 				<div class="col-sm-10" >
-
+				<c:if test="${mem}==null">
 					<a href="login" class="text-center">로그인</a>
 					<a href="memberAdd" class="text-center">회원가입</a>
 					<a href="list" class="text-center">QnA</a>
-
+				</c:if>
+				<c:if test="${mem}!=null">
+					<a href="home" class="text-center">로그아웃</a>
+					<a href="mypage" class="text-center">mypage</a>
+					<a href="list" class="text-center">QnA</a>
+				</c:if>
 				</div>
 		
 			</div>

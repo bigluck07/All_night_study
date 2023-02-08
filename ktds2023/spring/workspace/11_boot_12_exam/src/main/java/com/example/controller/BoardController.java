@@ -26,10 +26,10 @@ public class BoardController {
 		return "index"; //  /WEB-INF/views/main.jsp
 	}
 	
-	@GetMapping("/logined")
-	public String logined() throws Exception{
-		return "index2"; //  /WEB-INF/views/main.jsp
-	}
+//	@GetMapping("/logined")
+//	public String logined() throws Exception{
+//		return "index2"; //  /WEB-INF/views/main.jsp
+//	}
 	
 	@GetMapping("/login")
 	public String login() throws Exception{
@@ -48,7 +48,7 @@ public class BoardController {
 		tx.commit();
 		if (mem.getPasswd().equals(passwd)) {
 			session.setAttribute("mem", mem);
-			return "redirect:logined";
+			return "redirect:home";
 		} else {
 			return "error";
 		}

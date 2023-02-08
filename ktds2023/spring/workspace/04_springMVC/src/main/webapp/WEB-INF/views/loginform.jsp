@@ -9,7 +9,7 @@
 <body>
 
 <h2> 로그인 </h2>
-<form action="login">
+<form action="login" method="post">
 	아이디:<input type="text" name="userid"><br>
 	비밀번호:<input type="text" name="passwd"><br>
 	<input type="submit" name="로그인"><br>

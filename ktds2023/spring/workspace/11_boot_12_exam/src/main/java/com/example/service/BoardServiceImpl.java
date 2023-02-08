@@ -3,10 +3,12 @@
  */
 package com.example.service;
 
+@Service("boardservice")
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Reposit
+import org.springframework.stereotype.Service;ory;
 
 import com.example.entity.Board;
 import com.example.entity.Member;
