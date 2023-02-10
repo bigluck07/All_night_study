@@ -24,7 +24,7 @@ import com.example.service.MemberService;
 public class MemberController {
 	
 	@Autowired
-	MemberService service;
+	MemberService memberService;
 	
 	@RequestMapping("/signUp")
 	public String loginUI() {
@@ -38,7 +38,7 @@ public class MemberController {
 						  @RequestParam("pw") String pw) {
 
 		String mesg = "사용가능";
-		if(service.idCheck(userid) > 0) {// 중복확인한 값을 int로 받음
+		if(memberService.idCheck(userid) > 0) {// 중복확인한 값을 int로 받음
 			mesg = "사용불가";
 		}
 		
@@ -50,7 +50,7 @@ public class MemberController {
 	public String memberAdd(MemberDTO dto, Model model){
 		model.addAttribute("action", "회원가입");
 		try {
-			if (service.memberAdd(dto) != 0) {
+			if (memberService.memberAdd(dto) != 0) {
 				model.addAttribute("message", "회원가입 성공");
 			} else {
 				throw new Exception();
@@ -62,24 +62,27 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/updateMember", method = RequestMethod.POST)
-	public String memberUpdate() {
-		
-		/* 
-		 * 
-		 */
-		
+	public String memberUpdate(MemberDTO dto, Model model) {
+		System.out.println(dto);
+		int n = 0;
+		try {
+			n = memberService.memberUpdate(dto);
+		} catch (Exception e) {
+
+		}
+		model.addAttribute("action", "회원정보수정");
+		if (n == 1) {
+			model.addAttribute("message", "회원정보수정 성공");
+		} else {
+			model.addAttribute("message", "회원정보수정 실패");  //컬럼 값이 너무 크거나 하는 경우 오류발생 처리
+		}		
 		return "memberResult";
 	}
 	
 	@RequestMapping("/mypage")
-	public String mypage() {		
-		
-		/* 
-		 * 
-		 */
-		
-		return "mypage";  
+	public String mypage(HttpSession session) {		
+		MemberDTO mdto = (MemberDTO)session.getAttribute("user") ;
+		session.setAttribute("user", mdto);		
+		return "mypage";  //mypage.jsp
 	}		
-	
-
 }

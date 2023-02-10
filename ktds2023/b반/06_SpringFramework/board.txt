@@ -1,0 +1,9 @@
+# board 테이블
+DROP TABLE board;
+CREATE TABLE board
+( NO INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(30),
+  author VARCHAR(10),
+  content VARCHAR(100),
+  writeday DATE DEFAULT NOW(),
+  readcnt INT DEFAULT 0 );

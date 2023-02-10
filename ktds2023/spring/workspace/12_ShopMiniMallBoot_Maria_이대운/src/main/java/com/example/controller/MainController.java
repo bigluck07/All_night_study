@@ -1,21 +1,35 @@
+//ShopMiniMall 서블릿 버전의 MainServlet 역할
+
 package com.example.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.dto.GoodsDTO;
+import com.example.service.GoodsService;
 
 @Controller
 public class MainController {
 
-	@GetMapping("/")
-	public String index(Model m) {
+	@Autowired
+	GoodsService goodsService;
+
+	
+	@RequestMapping("/main")
+	public String goods(Model model) {		
+		List<GoodsDTO> goodsDTO =  goodsService.goodsList();
+		if(goodsDTO!=null) {
+			model.addAttribute("goods", goodsDTO);
+		}
+		
+		return "shopMain";   
+	}
+	@RequestMapping("/")
+	public String main(Model m) {
 		return "index";   
 	}
-	
-	@GetMapping("/main")
-	public String main(Model model) {
-		
-		return "shopMain"; 
-	}
 }
-

@@ -15,24 +15,29 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	MemberDAO dao;
 
-	public MemberDTO login(Map<String, String> map) throws Exception{
-		return null;
+	public MemberDTO login(Map<String, String> map) {
+		MemberDTO dto = dao.login(map);
+		return dto;
 	}
 	
-	public int idCheck(String userid){
-		return dao.idCheck(userid);
+	public int idCheck(String userid) {
+		int count = dao.idCheck(userid);
+		return count;
 	}
 
-	public int memberAdd(MemberDTO dto) throws Exception{
-		return dao.memberAdd(dto);
+	public int memberAdd(MemberDTO dto) {
+		int n = dao.memberAdd(dto);
+		return n;
 	}
 	
 	public MemberDTO mypage(String userid) {
-		return null;
+		MemberDTO dto = dao.mypage(userid);
+		return dto;
 	}
 
 	public int memberUpdate(MemberDTO dto) {
-		return 0;
+		int n = dao.memberUpdate(dto);
+		return n;
 	}
 }
 

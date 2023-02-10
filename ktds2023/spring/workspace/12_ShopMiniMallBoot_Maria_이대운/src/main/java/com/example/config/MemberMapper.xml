@@ -6,11 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="login" resultType="MemberDTO">
 		select *
-		from shop
-		<if test="searchName =='userid' and searchPass =='passwd'">
-	       where userid = searchValue and passwd=searchName
-	    </if>
-		order by userid
+		from member
+     	where userid = #{userid} and passwd = #{passwd}
 	</select>
 	
 	<select id="idCheck" resultType="int" parameterType="string">
@@ -24,11 +21,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	values( #{userid}, #{passwd}, #{username}, #{post}, #{addr1}, #{addr2}, #{phone1}, #{phone2}, #{phone3}, #{email1}, #{email2})
     </insert>
    
-    <select id="mypage" >
-	
-    </select>
+    <select id="mypage" parameterType="string" resultType="MemberDTO">
+	  select userid,passwd,username,post,addr1,addr2,
+                         phone1,phone2,phone3,email1,email2
+      from member
+      where userid = #{userid}
+	</select>
    
-    <update id="updateMember">
-	
-    </update>
+    <update id="updateMember" parameterType="MemberDTO">
+	  update member
+	  	set passwd=#{passwd},post=#{post},addr1=#{addr1},addr2=#{addr2},phone1=#{phone1},phone2=#{phone2},phone3=#{phone3},email1=#{email1},email2=#{email2}
+      where userid = #{userid}
+	</update>
 </mapper>

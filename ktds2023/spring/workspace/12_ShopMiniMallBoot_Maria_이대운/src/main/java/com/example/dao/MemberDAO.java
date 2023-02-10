@@ -13,27 +13,25 @@ import com.example.dto.MemberDTO;
 public class MemberDAO {
 	
 	@Autowired
-	SqlSessionTemplate session;
+	SqlSessionTemplate template;
 	
 	public MemberDTO login(Map<String, String> map) {
-		session.selectList("MemberMapper.login");
-		return null;
+		return template.selectOne("MemberMapper.login", map);
 	}
 
 	public int idCheck(String userid) {
-		return session.selectOne("MemberMapper.idCheck", userid);
+		return template.selectOne("MemberMapper.idCheck", userid);
 	}
 
-	public int memberAdd(MemberDTO dto) throws Exception{
-		return session.insert("MemberMapper.memberAdd", dto);
+	public int memberAdd(MemberDTO dto) {
+		return template.insert("MemberMapper.memberAdd", dto);
 	}
 
 	public MemberDTO mypage(String userid) {
-		session.selectList("MemberMapper.mypage");
-		return null;
+		return template.selectOne("MemberMapper.mypage", userid);
 	}
 
 	public int memberUpdate(MemberDTO dto) {
-		return session.insert("MemberMapper.updateMember", dto);
+		return template.insert("MemberMapper.updateMember", dto);
 	}
 }

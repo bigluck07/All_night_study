@@ -1,0 +1,211 @@
+https://drive.google.com/drive/folders/1f8jU918MSlQmnfp7ccl_qzMmVQ89XVUw?usp=sharing
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<filter>
+       <filter-name>filter</filter-name>
+       <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+       <init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+     </filter>
+   
+     <filter-mapping>
+       <filter-name>filter</filter-name>
+       <url-pattern>/*</url-pattern>
+      </filter-mapping>
+
+
+
+1. 환경설정
+  
+  가. JDK11 설치 + Tomcat 9
+   https://www.oracle.com/java/technologies/downloads/#java11
+
+  나. eclipse-jee 2022-12-R 설치
+   
+   https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2022-12/R/eclipse-jee-2022-12-R-win32-x86_64.zip
+
+
+
+  다. mariaDB 10.11.1 RC 버전 설치
+
+   https://mariadb.org/download/?t=mariadb&p=mariadb&r=10.11.1&os=windows&cpu=x86_64&pkg=msi&m=blendbyte
+
+  
+  라. Spring Framework 5.2.22.RELEASE  및 Spring Boot 2.7.7  용 STS 3 버전 설치 , 빌드툴은 Maven
+   https://download.springsource.com/release/STS/3.9.18.RELEASE/dist/e4.21/spring-tool-suite-3.9.18.RELEASE-e4.21.0-win32-x86_64.zip
+
+
+  라. MyBatis 3 및 JPA 사용
+
+    - MariaDB JDBC 드라이버 사용시
+     드라이버 : org.mariadb.jdbc.Driver
+     URL : jdbc:mariadb://서버아이피:3306(사용포트)/데이터베이스명
+
+     JDBC 드라이버 다운로드 URL : https://mariadb.com/kb/en/mariadb-connector-j-3-1-0-release-notes/
+
+
+ 2.  Spring Framework + mybatis  의존성
+
+  
+		
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis</artifactId>
+    <version>3.4.6</version>
+</dependency>
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis-spring</artifactId>
+    <version>1.3.2</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>5.0.8.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-dbcp2</artifactId>
+    <version>2.5.0</version>
+</dependency>
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>3.1.0</version>
+</dependency>	
+
+3. Spring Boot + mybatis
+  # application.properties
+    spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.datasource.url=jdbc:mariadb://localhost:3306/ktds
+spring.datasource.username=root
+spring.datasource.password=1234
+
+
+#mybatis
+mybatis.mapper-locations=com/config/sqlMapper.xml
+mybatis.type-aliases-package=com.example.dto
+
+ # 의존성
+ <dependency>
+	<groupId>org.mybatis.spring.boot</groupId>
+	<artifactId>mybatis-spring-boot-starter</artifactId>
+	<version>2.1.4</version>
+</dependency>
+
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+</dependency>
+
+
+3.  Spring Boot + JPA 의존성
+
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.mariadb.jdbc</groupId>
+		    <artifactId>mariadb-java-client</artifactId>
+		</dependency>	
+		<dependency>
+			<groupId>org.bgee.log4jdbc-log4j2</groupId>
+			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+			<version>1.16</version>
+		</dependency>
+		<!-- JSP 사용 -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency> 
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency> 
+
+  https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+  
+ 4. Spring MVC 파일업로드 의존성
+  <dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.4</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.6</version>
+</dependency>
+
+5. Thymeleaf 의존성
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+   		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+6. AOP 의존성
+ <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.9.4</version>
+</dependency>
+
+
+7. Spring Boot JSP 의존성
+ <!-- JSP 사용 -->
+	<dependency>
+		<groupId>org.apache.tomcat.embed</groupId>
+		<artifactId>tomcat-embed-jasper</artifactId>
+		<scope>provided</scope>
+	</dependency> 
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+	</dependency>
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+
+8. Swagger
+ 	 <dependency>
+		<groupId>io.springfox</groupId>
+		<artifactId>springfox-swagger2</artifactId>
+		<version>2.9.2</version>
+	</dependency>
+	<dependency>
+		<groupId>io.springfox</groupId>
+		<artifactId>springfox-swagger-ui</artifactId>
+		<version>2.9.2</version>
+	</dependency>
+ #spring boot 2.6이상시 다음과 같이 설정
+# http://localhost:8090/app/swagger-ui.html
+spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+
+
+9. Spring Data JPA ( query methods )
+https://docs.spring.io/spring-data/jpa/docs/2.7.7/reference/html/#jpa.query-methods
+ 
