@@ -115,7 +115,20 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency> 
+		
+		<!-- logback start -->
+		<dependency>
+   		 	<groupId>ch.qos.logback</groupId>
+    		<artifactId>logback-classic</artifactId>
+    		<version>1.1.7</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.slf4j</groupId>
+    		<artifactId>jcl-over-slf4j</artifactId>
+    		<version>1.7.21</version>
+		</dependency>
+<!-- logback end -->       
 	</dependencies>
     <build>
         <plugins>

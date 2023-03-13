@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>a</h2>
+<h3>1. th:text - 값 출력</h3>
+userid:<span th:text="${userid}"></span><br>
+passwd:<span th:text="passwd"></span><br>
+
+산술연산1:<span th:text="${passwd+1}"></span><br>
+산술연산2:<span th:text="${passwd}+1"></span><br>
+
+비교연산1:<span th:text="${passwd > 100}"></span><br>
+비교연산2:<span th:text="${passwd} > 100"></span><br>
+비교연산3:<span th:text="${passwd != null} "></span><br>
+비교연산4:<span th:text="${passwd} != null"></span><br>
+
+논리연산1:<span th:text="${passwd} != null and 4==4"></span><br>
+
+<h3>2. th:with - 변수</h3>
+<div th:with="xxx=${userid}, yyy=${passwd}">
+	userid:<span th:text="${xxx}"></span>
+	passwd:<span th:text="${yyy}"></span>
+</div>
+<h3>3. th:value - 사용자입력태그의 value값 </h3>
+userid:<input type="text" th:value="${userid}"><br>
+passwd:<input type="text" th:valuet="passwd"><br>
+</body>
+</html>

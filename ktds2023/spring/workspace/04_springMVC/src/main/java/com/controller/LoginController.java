@@ -24,6 +24,9 @@ public class LoginController { // 비의존적인 class로 web이 아니어도 �
 	
 	@RequestMapping("/login")
 	public String login(LoginDTO dto) {
+		// post 한글처리
+		
+		
 		System.out.println(dto);
 		return "loginform";	 
 	}
