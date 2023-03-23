@@ -86,6 +86,10 @@ def solution(x,y,k,area):
         if area == 0 or area==4:
             for i in range(x, x+2):
                 for j in range(y, y+2):
+                    if not flow[i][j] and cnt:
+                        flow[i][j] = num
+                        cnt-=1
+
 '''
 공간을 나눠서 가장 작은 공간부터 확인할 수 있도록 함. 근데 이게 너무 어려운데...?
 분할정복 너무 어렵고....
