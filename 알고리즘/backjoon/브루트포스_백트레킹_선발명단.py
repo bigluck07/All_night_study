@@ -68,7 +68,7 @@ def check_state(idx, sum_state):
             player_board[x] = 0 # 재귀돌고 오면 0으로 바꿔서 확인하도록 함
             
             
-for _ in range(c): # 테스트케이스 수만큰 반복
+for _ in range(c): # 테스트케이스 수만큼 반복
     player_board = [0]*11 # 선발선수 능력치
     max_state = 0 # 합계
     player = [list(map(int, sys.stdin.readline().strip().split())) for _ in range(11)] # 선수능력치
